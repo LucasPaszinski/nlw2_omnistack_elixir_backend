@@ -3,10 +3,10 @@ defmodule Backend.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
-    field :avatar, :string
-    field :bio, :string
-    field :name, :string
-    field :whatsapp, :integer
+    field :avatar, :string, null: false
+    field :bio, :string, null: false
+    field :name, :string, null: false
+    field :whatsapp, :integer, null: false
 
     timestamps()
   end

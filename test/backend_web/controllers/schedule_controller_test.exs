@@ -56,7 +56,10 @@ defmodule BackendWeb.ScheduleControllerTest do
   describe "update schedule" do
     setup [:create_schedule]
 
-    test "renders schedule when data is valid", %{conn: conn, schedule: %Schedule{id: id} = schedule} do
+    test "renders schedule when data is valid", %{
+      conn: conn,
+      schedule: %Schedule{id: id} = schedule
+    } do
       conn = put(conn, Routes.schedule_path(conn, :update, schedule), schedule: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 

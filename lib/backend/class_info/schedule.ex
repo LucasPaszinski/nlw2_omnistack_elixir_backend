@@ -3,9 +3,9 @@ defmodule Backend.ClassInfo.Schedule do
   import Ecto.Changeset
 
   schema "schedules" do
-    field :from, :integer
-    field :to, :integer
-    field :week_day, :integer
+    field :from, :integer, null: false
+    field :to, :integer, null: false
+    field :week_day, :integer, null: false
     belongs_to :class, Backend.ClassInfo.Class
 
     timestamps()
@@ -17,6 +17,5 @@ defmodule Backend.ClassInfo.Schedule do
     |> cast(attrs, [:week_day, :from, :to, :class_id])
     |> validate_required([:week_day, :from, :to])
     |> assoc_constraint(:class)
-
   end
 end

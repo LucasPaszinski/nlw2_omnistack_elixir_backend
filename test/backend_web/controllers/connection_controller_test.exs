@@ -4,12 +4,8 @@ defmodule BackendWeb.ConnectionControllerTest do
   alias Backend.ClassInfo
   alias Backend.ClassInfo.Connection
 
-  @create_attrs %{
-
-  }
-  @update_attrs %{
-
-  }
+  @create_attrs %{}
+  @update_attrs %{}
   @invalid_attrs %{}
 
   def fixture(:connection) do
@@ -49,8 +45,13 @@ defmodule BackendWeb.ConnectionControllerTest do
   describe "update connection" do
     setup [:create_connection]
 
-    test "renders connection when data is valid", %{conn: conn, connection: %Connection{id: id} = connection} do
-      conn = put(conn, Routes.connection_path(conn, :update, connection), connection: @update_attrs)
+    test "renders connection when data is valid", %{
+      conn: conn,
+      connection: %Connection{id: id} = connection
+    } do
+      conn =
+        put(conn, Routes.connection_path(conn, :update, connection), connection: @update_attrs)
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.connection_path(conn, :show, id))
@@ -61,7 +62,9 @@ defmodule BackendWeb.ConnectionControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, connection: connection} do
-      conn = put(conn, Routes.connection_path(conn, :update, connection), connection: @invalid_attrs)
+      conn =
+        put(conn, Routes.connection_path(conn, :update, connection), connection: @invalid_attrs)
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end

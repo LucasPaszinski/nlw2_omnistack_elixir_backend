@@ -9,6 +9,16 @@ defmodule Backend.Accounts do
   alias Backend.Accounts.User
 
   def create_user(attrs \\ %{}) do
+    %User{}
+    |> User.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def get_user(id) do
+    Repo.get(User, id)
+  end
+
+  def get_user_atom_map(attrs) do
     %{
       "name" => name,
       "avatar" => avatar,
@@ -16,19 +26,11 @@ defmodule Backend.Accounts do
       "bio" => bio
     } = attrs
 
-    %User{}
-    |> User.changeset(%{
+    %{
       name: name,
       avatar: avatar,
       whatsapp: whatsapp,
       bio: bio
-    })
-    |> Repo.insert()
-  end
-
-  def get_user(id) do
-    user = Repo.get(User, id)
-    IO.inspect user
-    user
+    }
   end
 end

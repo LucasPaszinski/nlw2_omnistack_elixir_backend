@@ -7,20 +7,20 @@ defmodule BackendWeb.ConnectionController do
   action_fallback BackendWeb.FallbackController
 
   def index(conn, _params) do
-    connections = ClassInfo.list_connections()
-    render(conn, "index.json", connections: connections)
+    connections = ClassInfo.total_connections()
+
+    conn
+    |> json(%{total_connections: connections})
   end
 
   def create(conn, params) do
-    
-    %{"user_id" => user_id} = params
-    user = Backend.Accounts.get_user(user_id) 
-    IO.puts "user"
-    IO.inspect user
-    {:ok, %Connection{} = connection}  = ClassInfo.create_connection(params, user)
-    
+    attrs = ClassInfo.get_connections_atom_map(params)
+    user = Backend.Accounts.get_user(attrs.user_id)
+
+    {:ok, %Connection{} = connection} = ClassInfo.create_connection(attrs, user)
+
     conn
     |> put_status(:created)
-    |> render("show.json", %{connection: connection})
+    |> json(%{})
   end
 end
