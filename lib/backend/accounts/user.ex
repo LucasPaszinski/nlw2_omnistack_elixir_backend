@@ -6,7 +6,7 @@ defmodule Backend.Accounts.User do
     field :avatar, :string, null: false
     field :bio, :string, null: false
     field :name, :string, null: false
-    field :whatsapp, :integer, null: false
+    field :whatsapp, :bigint, null: false
 
     timestamps()
   end
