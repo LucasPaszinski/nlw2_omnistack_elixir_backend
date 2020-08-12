@@ -17,7 +17,7 @@ defmodule BackendWeb.ConnectionController do
     attrs = ClassInfo.get_connections_atom_map(params)
     user = Backend.Accounts.get_user(attrs.user_id)
 
-    {:ok, %Connection{} = connection} = ClassInfo.create_connection(attrs, user)
+    {:ok, %Connection{}} = ClassInfo.create_connection(attrs, user)
 
     conn
     |> put_status(:created)
