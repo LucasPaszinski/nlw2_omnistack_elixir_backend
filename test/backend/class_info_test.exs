@@ -49,12 +49,13 @@ defmodule Backend.ClassInfoTest do
 
     test "create_connection/1 with valid data creates a connection" do
       user = user_fixture()
-      assert {:ok, %Connection{} = connection} = ClassInfo.create_connection(@valid_attrs)
+      assert {:ok, %Connection{} = connection} = ClassInfo.create_connection(%{user_id: user.id}, user)
     end
 
     test "create_connection/1 with invalid data returns error changeset" do
       user = user_fixture()
-      assert {:error, %Ecto.Changeset{}} = ClassInfo.create_connection(@invalid_attrs, user)
+      assert {:error, %Ecto.Changeset{}} = ClassInfo.create_connection(%{}, user)
+      assert {:error, %Ecto.Changeset{}} = ClassInfo.create_connection(%{}, nil)
     end
   end
 

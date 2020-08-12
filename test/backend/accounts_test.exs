@@ -11,6 +11,7 @@ defmodule Backend.AccountsTest do
 
     test "get_user/1 returns the user with given id" do
       user = user_fixture()
+      IO.inspect user
       assert Accounts.get_user(user.id) == user
       assert Accounts.get_user(999) == nil
     end

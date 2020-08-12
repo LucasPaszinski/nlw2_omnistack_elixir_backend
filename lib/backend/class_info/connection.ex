@@ -12,7 +12,7 @@ defmodule Backend.ClassInfo.Connection do
   def changeset(connection, attrs) do
     connection
     |> cast(attrs, [:user_id])
-    |> validate_required([])
+    |> validate_required([:user_id])
     |> assoc_constraint(:user)
   end
 end

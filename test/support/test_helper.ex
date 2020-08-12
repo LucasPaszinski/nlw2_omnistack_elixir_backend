@@ -1,14 +1,15 @@
-defmodule Backend.TestHelper do
+defmodule Backend.TestHelpers do
   alias Backend.{
     Accounts,
     ClassInfo
   }
 
-    def user_fixture(attrs \\ %{cost: 42, subject: "some subject"}) do
+    def user_fixture(attrs \\ %{avatar: "some avatar", bio: "some bio", name: "some name", whatsapp: 42}) do
         {:ok, user} =
           attrs
+          |> IO.inspect
           |> Accounts.create_user()
-  
+          |> IO.inspect
         user
     end
 

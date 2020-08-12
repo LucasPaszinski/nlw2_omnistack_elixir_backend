@@ -3,8 +3,8 @@ defmodule Backend.ClassInfo.Class do
   import Ecto.Changeset
 
   schema "classes" do
-    field :cost, :integer
-    field :subject, :string
+    field :cost, :integer, null: false
+    field :subject, :string, null: false
     belongs_to :user, Backend.Accounts.User
 
     timestamps()
